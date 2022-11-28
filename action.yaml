@@ -13,6 +13,31 @@ inputs:
       - warn
       - error
 
+  report-severity:
+    description: Minimum severity to report
+    type: choice
+    required: false
+    default: LOW
+    options:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFO
+
+  break-severity:
+    description: Minimum severity to break the pipeline
+    type: choice
+    required: false
+    default: NEVER
+    options:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFO
+      - NEVER
+
   scan-repo:
     description: Wether to scan the local repo path
     type: boolean
@@ -56,4 +81,6 @@ runs:
         SCAN_REPO: ${{ inputs.scan-repo }}
         TARGET_IMAGES: ${{ inputs.target-images }}
         TARGET_GITREPOS: ${{ inputs.target-gitrepos }}
+        REPORT_SEVERITY: ${{ inputs.report-severity }}
+        BREAK_SEVERITY: ${{ inputs.break-severity }}
       run: $GITHUB_ACTION_PATH/run.sh

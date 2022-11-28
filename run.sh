@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 VL_ARGS=()
 
 # Setting log level
@@ -25,5 +27,11 @@ if [ -n "${SCAN_REPO}" ]; then
     VL_ARGS+=("-t" "." "-a" "GitRepository")
 fi
 
+if [ -n "${REPORT_SEVERITY}" ]; then
+    VL_ARGS+=("-s" "$REPORT_SEVERITY" )
+fi
+
 echo "vulcan-local ${VL_ARGS[*]}"
-vulcan-local "${VL_ARGS[@]}"
+vulcan-local "${VL_ARGS[@]}" || exit_status=$?
+
+echo "Exit status $exit_status"
