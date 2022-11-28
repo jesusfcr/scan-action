@@ -28,4 +28,4 @@ runs:
       shell: bash
       env:
         LOG_LEVEL: ${{ inputs.log-level }}
-      run: ./run.sh
+      run: $GITHUB_ACTION_PATH/run.sh
