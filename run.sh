@@ -11,7 +11,7 @@ fi
 
 # Adding images
 if [ -n "${TARGET_IMAGES}" ]; then
-    for TIMG in ${TARGET_IMAGE_REFS}; do
+    for TIMG in ${TARGET_IMAGES}; do
         VL_ARGS+=("-t" "${TIMG}" "-a" "DockerImage")
     done
 fi
@@ -30,6 +30,9 @@ fi
 if [ -n "${REPORT_SEVERITY}" ]; then
     VL_ARGS+=("-s" "$REPORT_SEVERITY" )
 fi
+
+echo "Configs $USE_LOCAL_CONFIG - $LOCAL_CONFIG"
+ls -l 
 
 if [ -n "${USE_LOCAL_CONFIG}" ]; then
     if [ -f "${LOCAL_CONFIG}" ]; then   # local not an url.

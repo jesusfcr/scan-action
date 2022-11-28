@@ -63,7 +63,7 @@ inputs:
   target-gitrepos:
     description: Space separated list of git repositories 
     type: string
-    default: true
+    required: false
 
   vulcan-local-version:
     description: Vulcan local version to use
