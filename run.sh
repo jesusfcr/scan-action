@@ -31,10 +31,7 @@ if [ -n "${REPORT_SEVERITY}" ]; then
     VL_ARGS+=("-s" "$REPORT_SEVERITY" )
 fi
 
-echo "Configs $USE_LOCAL_CONFIG - $LOCAL_CONFIG"
-ls -l 
-
-if [ -n "${USE_LOCAL_CONFIG}" ]; then
+if [ "${USE_LOCAL_CONFIG}" == "true" ]; then
     if [ -f "${LOCAL_CONFIG}" ]; then   # local not an url.
         VL_ARGS+=("-c" "$LOCAL_CONFIG" )
     fi
