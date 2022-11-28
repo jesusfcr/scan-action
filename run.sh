@@ -15,10 +15,14 @@ if [ -n "${TARGET_IMAGES}" ]; then
 fi
 
 # Scan paths as GitRepository
-if [ -n "${TARGET_PATHS}" ]; then
-    for TP in ${TARGET_PATHS}; do
-        VL_ARGS+=("-t" "${TP}" "-a" "GitRepository")
+if [ -n "${TARGET_GITREPOS}" ]; then
+    for TR in ${TARGET_PATHS}; do
+        VL_ARGS+=("-t" "${TR}" "-a" "GitRepository")
     done
+fi
+
+if [ -n "${SCAN_REPO}" ]; then
+    VL_ARGS+=("-t" "." "-a" "GitRepository")
 fi
 
 echo "vulcan-local ${VL_ARGS[*]}"

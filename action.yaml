@@ -13,14 +13,19 @@ inputs:
       - warn
       - error
 
+  scan-repo:
+    description: Wether to scan the local repo path
+    type: boolean
+    default: true
+
   target-images:
     description: Space separated list of images to scan.
     type: string
     required: false
 
-  scan-repo-path:
-    description: Wether to scan the local repo path
-    type: boolean
+  target-gitrepos:
+    description: Space separated list of git repositories 
+    type: string
     default: true
 
   vulcan-local-version:
@@ -32,6 +37,10 @@ runs:
   using: composite
 
   steps:
+    - uses: actions/checkout@v3
+      if: ${{ inputs.scan-repo }}
+      with:
+        depth: 1
 
     - name: Install vulcan-local
       shell: bash
@@ -44,6 +53,7 @@ runs:
       shell: bash
       env:
         LOG_LEVEL: ${{ inputs.log-level }}
+        SCAN_REPO: ${{ inputs.scan-repo }}
         TARGET_IMAGES: ${{ inputs.target-images }}
-        TARGET_PATHS: ${{ inputs.scan-repo-path && "$GITHUB_WORKSPACE" }}
+        TARGET_GITREPOS: ${{ inputs.target-gitrepos }}
       run: $GITHUB_ACTION_PATH/run.sh
