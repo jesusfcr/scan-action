@@ -45,5 +45,5 @@ runs:
       env:
         LOG_LEVEL: ${{ inputs.log-level }}
         TARGET_IMAGES: ${{ inputs.target-images }}
-        TARGET_PATHS: ${{ ternary inputs.scan-repo-path "$GITHUB_WORKSPACE" "" }}
+        TARGET_PATHS: ${{ inputs.scan-repo-path && "$GITHUB_WORKSPACE" }}
       run: $GITHUB_ACTION_PATH/run.sh
