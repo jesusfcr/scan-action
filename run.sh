@@ -31,6 +31,12 @@ if [ -n "${REPORT_SEVERITY}" ]; then
     VL_ARGS+=("-s" "$REPORT_SEVERITY" )
 fi
 
+if [ -n "${USE_LOCAL_CONFIG}" ]; then
+    if [ -f "${LOCAL_CONFIG}" ]; then   # local not an url.
+        VL_ARGS+=("-c" "$LOCAL_CONFIG" )
+    fi
+fi
+
 echo "vulcan-local ${VL_ARGS[*]}"
 vulcan-local "${VL_ARGS[@]}" || exit_status=$?
 
