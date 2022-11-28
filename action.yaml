@@ -13,26 +13,37 @@ inputs:
       - warn
       - error
 
-  target-image-refs:
+  target-images:
     description: Space separated list of images to scan.
     type: string
     required: false
+
+  scan-repo-path:
+    description: Wether to scan the local repo path
+    type: boolean
+    default: true
+
+  vulcan-local-version:
+    description: Vulcan local version to use
+    type: string
+    default: v0.2.1
 
 runs:
   using: composite
 
   steps:
 
-    - uses: actions/checkout@v3
-
     - name: Install vulcan-local
       shell: bash
+      env:
+        VULCAN_LOCAL_VERSION: ${{ inputs.vulcan-local-version }}
       run: |
-        curl -sfL https://raw.githubusercontent.com/adevinta/vulcan-local/master/script/get | sh -s -- --version v0.2.1
+        curl -sfL https://raw.githubusercontent.com/adevinta/vulcan-local/master/script/get | sh -s -- --version $VULCAN_LOCAL_VERSION
 
     - name: Scan code
       shell: bash
       env:
         LOG_LEVEL: ${{ inputs.log-level }}
-        TARGET_IMAGE_REFS: ${{ inputs.target-image-refs }}
+        TARGET_IMAGES: ${{ inputs.target-images }}
+        TARGET_PATHS: ${{ ternary inputs.scan-repo-path "$GITHUB_WORKSPACE" "" }}
       run: $GITHUB_ACTION_PATH/run.sh

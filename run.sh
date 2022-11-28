@@ -8,14 +8,18 @@ if [ -n "${LOG_LEVEL}" ]; then
 fi
 
 # Adding images
-if [ -n "${TARGET_IMAGE_REFS}" ]; then
-    for IMG in ${TARGET_IMAGE_REFS}; do
-        VL_ARGS+=("-t" "${IMG}" "-a" "DockerImage")
+if [ -n "${TARGET_IMAGES}" ]; then
+    for TIMG in ${TARGET_IMAGE_REFS}; do
+        VL_ARGS+=("-t" "${TIMG}" "-a" "DockerImage")
     done
 fi
 
-# Adding local repo
-VL_ARGS+=("-t" "." "-a" "GitRepository")
+# Scan paths as GitRepository
+if [ -n "${TARGET_PATHS}" ]; then
+    for TP in ${TARGET_PATHS}; do
+        VL_ARGS+=("-t" "${TP}" "-a" "GitRepository")
+    done
+fi
 
 echo "vulcan-local ${VL_ARGS[*]}"
 vulcan-local "${VL_ARGS[@]}"
