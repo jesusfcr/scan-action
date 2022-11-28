@@ -47,6 +47,6 @@ vulcan-local "${VL_ARGS[@]}" || exit_status=$?
 
 echo "output -> [$GITHUB_OUTPUT]"
 
-echo "report=$OUTPUT_REPORT" >> $GITHUB_OUTPUT
+echo "::set-output name=report::$OUTPUT_REPORT"
 
 echo "Exit status $exit_status"
