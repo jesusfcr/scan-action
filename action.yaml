@@ -31,5 +31,6 @@ runs:
         if [ -e "${INPUT_LOG_LEVEL}" ]; then
             VL_ARGS+=("-l" "${INPUT_LOG_LEVEL}")
         fi
-
+        echo "log-level ${INPUT_LOG_LEVEL}"
+        echo "vulcan-local -t . ${VL_ARGS[@]}"
         vulcan-local -t . "${VL_ARGS[@]}"
