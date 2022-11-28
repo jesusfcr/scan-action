@@ -3,8 +3,14 @@ description: This action performs security scanning on your code.
 
 inputs:
   log-level:
-    description: 'Log level [error warning info debug]'
+    description: Log level
+    type: choice
     required: false
+    options:
+      - debug
+      - info
+      - warn
+      - error
 
 runs:
   using: composite
