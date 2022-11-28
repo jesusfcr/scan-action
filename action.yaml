@@ -75,6 +75,9 @@ outputs:
   report:
     value: ${{ steps.scan.outputs.report }}
     description: Path to the report file.
+  status:
+    value: ${{ steps.scan.outputs.status }}
+    description: Exit code depending on the vulns detected.
 
 runs:
   using: composite
