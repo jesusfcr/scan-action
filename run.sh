@@ -37,7 +37,7 @@ if [ "${USE_LOCAL_CONFIG}" == "true" ]; then
     fi
 fi
 
-# Create a temp file for report
+# Create a temp directory for the report
 TMPD=$(mktemp -d)
 OUTPUT_REPORT="$TMPD/report.json"
 VL_ARGS+=("-r" "$OUTPUT_REPORT")
@@ -48,5 +48,4 @@ vulcan-local "${VL_ARGS[@]}" || exit_status=$?
 echo "output -> [$GITHUB_OUTPUT]"
 
 echo "::set-output name=report::$OUTPUT_REPORT"
-
-echo "Exit status $exit_status"
+echo "::set-output name=status::$exit_status"

@@ -37,6 +37,7 @@ inputs:
       - LOW
       - INFO
 
+  # Not implemented yet, current behaviour is NEVER
   break-severity:
     description: Minimum severity to break the pipeline
     type: choice
@@ -84,6 +85,7 @@ runs:
       with:
         depth: 1
 
+    # This could be embedded into run.sh
     - name: Install vulcan-local
       shell: bash
       env:
