@@ -18,7 +18,7 @@ fi
 
 # Scan paths as GitRepository
 if [ -n "${TARGET_GITREPOS}" ]; then
-    for TR in ${TARGET_PATHS}; do
+    for TR in ${TARGET_GITREPOS}; do
         VL_ARGS+=("-t" "${TR}" "-a" "GitRepository")
     done
 fi
