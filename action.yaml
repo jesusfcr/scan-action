@@ -1,7 +1,14 @@
 name: Vulnerability Scanning Action
 description: This action performs security scanning on your code.
+
+inputs:
+  log-level:
+    description: 'Log level [error warning info debug]'
+    required: false
+
 runs:
   using: composite
+
   steps:
 
     - uses: actions/checkout@v3
@@ -14,4 +21,9 @@ runs:
     - name: Scan code
       shell: bash
       run: |
-        vulcan-local -t .
+        VL_ARGS=()
+        if [ -e "${INPUT_LOG_LEVEL}" ]; then
+            VL_ARGS+=("-l" "${INPUT_LOG_LEVEL}")
+        fi
+
+        vulcan-local -t . "${VL_ARGS[@]}"
