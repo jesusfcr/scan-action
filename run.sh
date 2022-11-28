@@ -42,6 +42,7 @@ TMPD=$(mktemp -d)
 OUTPUT_REPORT="$TMPD/report.json"
 VL_ARGS+=("-r" "$OUTPUT_REPORT")
 
+exit_status=0
 echo "vulcan-local ${VL_ARGS[*]}"
 vulcan-local "${VL_ARGS[@]}" || exit_status=$?
 
