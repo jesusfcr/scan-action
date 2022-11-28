@@ -2,6 +2,7 @@ name: Vulnerability Scanning Action
 description: This action performs security scanning on your code.
 
 inputs:
+
   log-level:
     description: Log level
     type: choice
@@ -11,6 +12,11 @@ inputs:
       - info
       - warn
       - error
+
+  target-image-refs:
+    description: Space separated list of images to scan.
+    type: string
+    required: false
 
 runs:
   using: composite
@@ -28,4 +34,5 @@ runs:
       shell: bash
       env:
         LOG_LEVEL: ${{ inputs.log-level }}
+        TARGET_IMAGE_REFS: ${{ inputs.target-image-refs }}
       run: $GITHUB_ACTION_PATH/run.sh
